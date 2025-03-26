@@ -47,3 +47,4 @@ build/
 
 # Local environment
 .env
+package-lock.json
