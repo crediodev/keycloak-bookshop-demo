@@ -1294,6 +1294,127 @@
       "subComponents" : { },
       "config" : { }
     } ],
+    "org.keycloak.storage.UserStorageProvider" : [ {
+      "id" : "1b6466da-0fce-493f-9b2a-82ec489ec943",
+      "name" : "OpenLDAP",
+      "providerId" : "ldap",
+      "subComponents" : {
+        "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" : [ {
+          "id" : "2a9de201-0351-4f33-8e3d-db5160ee7ef9",
+          "name" : "first name",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : {},
+          "config" : {
+            "ldap.attribute" : [ "givenName" ],
+            "is.mandatory.in.ldap" : [ "true" ],
+            "always.read.value.from.ldap" : [ "true" ],
+            "read.only": [ "false" ],
+            "user.model.attribute": [ "firstName" ]
+          }
+        }, {
+          "id" : "25903ff6-1485-49f6-a0b6-c0921cdefcca",
+          "name" : "username",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : {},
+          "config" : {
+            "ldap.attribute" : [ "cn" ],
+            "is.mandatory.in.ldap" : [ "true" ],
+            "always.read.value.from.ldap" : [ "false" ],
+            "read.only" : [ "false" ],
+            "user.model.attribute" : [ "username" ]
+          }
+        }, {
+          "id" : "e402eb4d-43d3-47bb-8a3d-8eab78d45edb",
+          "name" : "email",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : {},
+          "config" : {
+            "ldap.attribute" : [ "mail" ],
+            "is.mandatory.in.ldap" : [ "false" ],
+            "read.only" : [ "false" ],
+            "always.read.value.from.ldap" : [ "false" ],
+            "user.model.attribute" : [ "email" ]
+          }
+        }, {
+          "id" : "862c87c8-3ecd-4fbf-9438-13940b13441c",
+          "name" : "random initial password",
+          "providerId" : "hardcoded-ldap-attribute-mapper",
+          "subComponents" : {},
+          "config" : {
+            "ldap.attribute.value" : [ "${RANDOM}" ],
+            "ldap.attribute.name" : [ "userPassword" ]
+          }
+        }, {
+          "id" : "2221dc53-0da3-440c-a587-54b52c0edc5a",
+          "name" : "modify date",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : {},
+          "config" : {
+            "ldap.attribute" : [ "modifyTimestamp" ],
+            "is.mandatory.in.ldap" : [ "false" ],
+            "always.read.value.from.ldap" : [ "true" ],
+            "read.only" : [ "true" ],
+            "user.model.attribute" : [ "modifyTimestamp" ]
+          }
+        }, {
+          "id" : "d2bb22a1-1bf1-4bd4-bed0-8d39fab8f227",
+          "name" : "creation date",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : {},
+          "config" : {
+            "ldap.attribute" : [ "createTimestamp" ],
+            "is.mandatory.in.ldap" : [ "false" ],
+            "read.only" : [ "true" ],
+            "always.read.value.from.ldap" : [ "true" ],
+            "user.model.attribute" : [ "createTimestamp" ]
+          }
+        }, {
+          "id" : "efd2cdf5-6486-47cd-85da-d0c842076f8c",
+          "name" : "last name",
+          "providerId" : "user-attribute-ldap-mapper",
+          "subComponents" : {},
+          "config" : {
+            "ldap.attribute" : [ "sn" ],
+            "is.mandatory.in.ldap" : [ "true" ],
+            "read.only" : [ "false" ],
+            "always.read.value.from.ldap" : [ "true" ],
+            "user.model.attribute" : [ "lastName" ]
+          }
+        } ]
+      },
+      "config" : {
+        "pagination" : [ "true" ],
+        "fullSyncPeriod" : [ "900" ],
+        "startTls" : [ "false" ],
+        "usersDn" : [ "ou=users,dc=credio,dc=xyz" ],
+        "connectionPooling" : [ "false" ],
+        "cachePolicy" : [ "DEFAULT" ],
+        "useKerberosForPasswordAuthentication" : [ "false" ],
+        "importEnabled" : [ "true" ],
+        "enabled" : [ "true" ],
+        "bindDn" : [  "cn=admin,dc=credio,dc=xyz" ],
+        "bindCredential" : [ "admin" ],
+        "usernameLDAPAttribute" : [ "cn" ],
+        "changedSyncPeriod" : [ "900" ],
+        "lastSync" : [ "1742973836" ],
+        "vendor" : [ "other" ],
+        "uuidLDAPAttribute" : [ "entryUUID" ],
+        "connectionUrl" : [ "ldap://credio-demo-shop-userdb:1389" ],
+        "allowKerberosAuthentication" : [ "false" ],
+        "syncRegistrations" : [ "true" ],
+        "authType" : [ "simple" ],
+        "connectionTimeout" : [ "30000" ],
+        "useTruststoreSpi" : [ "always" ],
+        "usePasswordModifyExtendedOp" : [ "true" ],
+        "trustEmail" : [ "false" ],
+        "userObjectClasses" : [ "inetOrgPerson" ],
+        "rdnLDAPAttribute" : [ "cn" ],
+        "readTimeout" : [ "30000" ],
+        "editMode" : [ "WRITABLE" ],
+        "validatePasswordPolicy" : [ "false" ],
+        "batchSizeForSync" : [ "20" ]
+      }
+    } ],
     "org.keycloak.keys.KeyProvider" : [ {
       "id" : "0a0f55c7-02af-49f2-bd84-5a9b5f75eb2b",
       "name" : "rsa-generated",
