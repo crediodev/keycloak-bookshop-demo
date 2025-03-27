@@ -8,12 +8,25 @@ if [ -z "$bookshop_demo_version" ]; then
 fi
 
 # build the "keycloak-bookshop-demo/checkout-react"
+currentDir=`pwd`
 checkoutReactSourceDir="./checkout-react"
 checkoutReactDistDir="dist"
 if [ -d "$checkoutReactSourceDir/$checkoutReactDistDir" ]; then
     rm -rf "$checkoutReactSourceDir/$checkoutReactDistDir"
 fi
-currentDir=`pwd`
+checkoutReactNodeModulesDir="node_modules"
+if [ -d "$checkoutReactSourceDir/$checkoutReactNodeModulesDir" ]; then
+    rm -rf "$checkoutReactSourceDir/$checkoutReactNodeModulesDir"
+    cd "$checkoutReactSourceDir"
+    npm prune
+    rcNpmPrune=$?
+    if [ "$rcNpmPrune" != "0" ]; then
+        echo "ERROR : NPM prune ENCOUNTERED FAILURE EXIT CODE ['$rcNpmPrune']"
+        cd "$currentDir"
+        exit $rcNpmPrune
+    fi
+    cd "$currentDir"
+fi
 cd "$checkoutReactSourceDir"
 npm install
 rcNpmInstall=$?
